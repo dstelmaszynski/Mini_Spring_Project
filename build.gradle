@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group ='org.example'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+
+ext {
+    logbackVersion = '1.4.11'
+    lombokVersion = '1.18.24'
+    springVersion = '5.3.20'
+}
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "ch.qos.logback:logback-classic:$logbackVersion"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    implementation "org.springframework:spring-core:$springVersion"
+    implementation "org.springframework:spring-beans:$springVersion"
+    implementation "org.springframework:spring-context:$springVersion"
+    implementation "org.springframework:spring-context-support:$springVersion"
+    implementation "org.springframework:spring-expression:$springVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+compileJava.options.encoding = 'UTF-8'
